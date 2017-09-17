@@ -17,6 +17,3 @@
 /web/bundles/
 !/.idea/
 /.idea/*
-/web/uploads/archive/*
-/web/uploads/download/*
-/web/uploads/slide/*
