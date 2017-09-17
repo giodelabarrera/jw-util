@@ -1,0 +1,72 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/security.html
+security:
+
+    encoders:
+        AppBundle\Entity\User: { algorithm: bcrypt, cost: 8 }
+
+    role_hierarchy:
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_ADMIN: [ROLE_USER]
+        ROLE_USER: [] # Everyone has this ROLES
+
+    providers:
+        main:
+            entity:
+                class: AppBundle\Entity\User # Users can login with username or password, check loadUserByUsername() method on UserRepository to change it
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        admin:
+            pattern:        ^/admin
+            provider:       main
+            anonymous:      ~
+            guard:
+                authenticators:
+                    - app.admin_form_login_authenticator
+            logout:
+                path:       admin_security_logout
+                target:     admin_security_login
+            remember_me:
+                secret:     2f7ab8ebb0a815478df6a607772c9e169ce75f72
+                lifetime:   604800  # 604.800 = 3.600 * 24 * 7 = 1 week
+
+#        main:
+#            pattern:        ^/*
+#            provider:       main
+#            anonymous:      ~
+#            guard:
+#                authenticators:
+#                    - app.form_login_authenticator
+#            logout:
+#                path:       security_logout
+#                target:     security_login
+#            remember_me:
+#                secret:     2f7ab8ebb0a815478df6a607772c9e169ce75f72
+#                lifetime:   604800  # 604.800 = 3.600 * 24 * 7 = 1 week
+
+    access_control:
+
+        # Login
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        #        - { path: ^/remember-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Admin
+        - { path: ^/admin/, roles: ROLE_ADMIN }
+
+        # Usuarios
+#        - { path: ^/user/switch-to, role: ROLE_SUPER_ADMINISTRADOR }
+
+#        # Clientes
+#        - { path: ^/client, role: ROLE_SUPER_ADMINISTRADOR }
+
+#        # Dashboard
+#        - { path: ^/$, roles: ROLE_USER }
+
+#        - { path: ^/, roles: ROLE_USER }
+

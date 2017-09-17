@@ -1,0 +1,40 @@
+services:
+
+    # Admin Form login authenticator
+    app.admin_form_login_authenticator:
+        class: AppBundle\Security\Admin\FormLoginAuthenticator
+        arguments:
+            - '@security.password_encoder'
+            - '@doctrine.orm.default_entity_manager'
+            - '@router'
+
+    # KNP Menu
+    app.menu_builder:
+        class: AppBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createAdminSidebarMenu, alias: admin_sidebar } # The alias is what is used to retrieve the menu
+
+    # KNP Menu request voter
+    app.menu_request_voter:
+        class: AppBundle\Menu\RequestVoter
+        arguments:
+            - '@request_stack'
+        tags:
+            - { name: knp_menu.voter }
+
+    # Forms:
+    app.form.type.role:
+        class: AppBundle\Form\Type\RoleType
+        arguments:
+            - '%security.role_hierarchy.roles%'
+        tags:
+            - { name: form.type }
+
+    # Managers:
+    app.user_manager:
+        class: AppBundle\Manager\UserManager
+        arguments:
+            - '@security.encoder_factory'
+            - '@doctrine.orm.default_entity_manager'
+            - '@security.token_storage'

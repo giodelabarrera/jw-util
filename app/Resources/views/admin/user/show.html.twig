@@ -1,0 +1,66 @@
+{% extends 'admin/base.html.twig' %}
+
+{% set entity_name = 'User' %}
+{% set route_prefix = 'admin_user' %}
+{% set action = 'show' %}
+{% set actions = {
+'create': true,
+'edit': true,
+'list': true,
+} %}
+{% set entity = user %}
+
+{% block page_header %}
+    {% embed 'admin/layout/crud/_page_header.html.twig' %}
+        {% block page_heading %}{{ entity_name }}{% endblock %}
+        {% block breadcrumb %}
+            {{ include('admin/layout/crud/_breadcrumb.html.twig') }}
+        {% endblock breadcrumb %}
+    {% endembed %}
+{% endblock page_header %}
+
+{% block page_content_nav %}
+    {{ include('admin/layout/crud/_page_content_navbar.html.twig') }}
+{% endblock page_content_nav %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-lg-12">
+
+            {% embed 'admin/layout/crud/_block.html.twig' %}
+
+                {% block block_header_title %}{{ entity_name }}{% endblock %}
+
+                {% block block_content %}
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                        <tr>
+                            <th style="width: 130px">Id</th>
+                            <td>{{ user.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Username</th>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td>{{ user.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Created</th>
+                            <td>{% if user.created %}{{ user.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>Updated</th>
+                            <td>{% if user.updated %}{{ user.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                {% endblock %}
+
+                {% block block_footer %}{% endblock %}
+
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}
