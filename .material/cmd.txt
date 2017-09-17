@@ -1,0 +1,11 @@
+
+# limpia cache dev
+
+sudo chmod -R 777 var/cache/ var/logs/; sudo chown -R $user:$group var/cache/ var/logs/; sudo php bin/console cache:clear; sudo chmod -R 777 var/cache/ var/logs/; sudo chown -R $user:$group var/cache/ var/logs/
+
+sudo chmod -R 777 var/cache/ var/logs/; sudo chown -R $user:$group var/cache/ var/logs/; sudo php bin/console cache:clear --env="prod"; sudo chmod -R 777 var/cache/ var/logs/; sudo chown -R $user:$group var/cache/ var/logs/
+
+
+# genera CRUD de entidad
+
+php bin/console generate:doctrine:crud --entity=AppBundle:FileType --format=annotation --route-prefix=/admin/filetype --with-write --overwrite --no-interaction

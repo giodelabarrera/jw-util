@@ -1,0 +1,181 @@
+
+<!-- Sidebar -->
+<nav id="sidebar">
+    <!-- Sidebar Scroll Container -->
+    <div id="sidebar-scroll">
+        <!-- Sidebar Content -->
+        <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
+        <div class="sidebar-content">
+            <!-- Side Header -->
+            <div class="side-header side-content bg-white-op">
+                <a class="h5 text-white" href="{{ path('admin_dashboard') }}">
+                    <span class="h4 font-w600 sidebar-mini-hide">{{ admin_app_name }}</span>
+                </a>
+            </div>
+            <!-- END Side Header -->
+
+            <!-- Side Content -->
+            <div class="side-content">
+
+                {{ knp_menu_render('admin_sidebar', {'ancestorClass': 'open', 'currentClass': 'active', 'template': '/admin/layout/menu/knp_menu.html.twig'}) }}
+
+                {#<ul class="nav-main">
+                    <li>
+                        <a class="active" href="{{ path('admin_dashboard') }}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                    </li>
+                    <li class="nav-main-heading"><span class="sidebar-mini-hide">Content</span></li>
+                    <li>
+                        <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="fa fa-th"></i><span class="sidebar-mini-hide">Slide</span></a>
+                        <ul>
+                            <li>
+                                <a href="{{ path('admin_slide_index') }}"><i class="fa fa-angle-double-right"></i> List</a>
+                            </li>
+                            <li>
+                            <a href="{{ path('admin_post_new') }}"><i class="fa fa-angle-double-right"></i> New</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>#}
+            </div>
+            <!-- END Side Content -->
+        </div>
+        <!-- Sidebar Content -->
+    </div>
+    <!-- END Sidebar Scroll Container -->
+</nav>
+<!-- END Sidebar -->
+
+{#
+{% if app.request.attributes.get('_route')[:6] == 'client' %}
+    {% set activeRoute = 'client' %}
+{% elseif app.request.attributes.get('_route')[:8] == 'alergeno' %}
+    {% set activeRoute = 'alergeno' %}
+{% elseif app.request.attributes.get('_route')[:8] == 'producto' %}
+    {% set activeRoute = 'producto' %}
+{% elseif app.request.attributes.get('_route')[:7] == 'partida' %}
+    {% set activeRoute = 'partida' %}
+{% elseif app.request.attributes.get('_route')[:5] == 'plato' %}
+    {% set activeRoute = 'plato' %}
+{% elseif app.request.attributes.get('_route')[:7] == 'familia' %}
+    {% set activeRoute = 'familia' %}
+{% elseif app.request.attributes.get('_route')[:10] == 'subfamilia' %}
+    {% set activeRoute = 'subfamilia' %}
+{% elseif app.request.attributes.get('_route')[:4] == 'tipo' %}
+    {% set activeRoute = 'tipo' %}
+{% elseif app.request.attributes.get('_route')[:9] == 'proveedor' %}
+    {% set activeRoute = 'proveedor' %}
+{% elseif app.request.attributes.get('_route')[:13] == 'formatocompra' %}
+    {% set activeRoute = 'formatocompra' %}
+{% elseif app.request.attributes.get('_route')[:10] == 'produccion' %}
+    {% set activeRoute = 'produccion' %}
+{% elseif app.request.attributes.get('_route')[:6] == 'evento' %}
+    {% set activeRoute = 'evento' %}
+{% elseif app.request.attributes.get('_route')[:4] == 'user' %}
+    {% set activeRoute = 'user' %}
+{% elseif app.request.attributes.get('_route')[:18] == 'informe_escandallo' %}
+    {% set activeRoute = 'informe_escandallo' %}
+{% elseif app.request.attributes.get('_route')[:16] == 'informe_partidas' %}
+    {% set activeRoute = 'informe_partidas' %}
+{% else %}
+    {% set activeRoute = 'dashboard' %}
+{% endif %}
+
+<!-- Sidebar -->
+<nav id="sidebar">
+    <!-- Sidebar Scroll Container -->
+    <div id="sidebar-scroll">
+        <!-- Sidebar Content -->
+        <!-- Adding .sidebar-mini-hide to an element will hide it when the sidebar is in mini mode -->
+        <div class="sidebar-content">
+            <!-- Side Header -->
+            <div class="side-header side-content bg-white-op">
+                <a class="h5 text-white" href="{{ path('homepage') }}">
+                    <span class="h4 font-w600 sidebar-mini-hide">{{ app.user.client.nombre }}</span>
+                </a>
+            </div>
+            <!-- END Side Header -->
+
+            <!-- Side Content -->
+            <div class="side-content">
+                <ul class="nav-main">
+                    <li>
+                        <a href="{{ path('homepage') }}" class="{% if activeRoute == 'dashboard' %}active{% endif %}"><i class="si si-speedometer"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                    </li>
+                    {% if is_granted('ROLE_SUPER_ADMINISTRADOR') %}
+                        <li class="nav-main-heading"><span class="sidebar-mini-hide">Administración</span></li>
+                        <li>
+                            <a href="{{ path('client_index') }}" class="{% if activeRoute == 'client' %}active{% endif %}"><i class="fa fa-dollar"></i><span class="sidebar-mini-hide">Cliente</span></a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMINISTRADOR') %}
+                    <li class="nav-main-heading"><span class="sidebar-mini-hide">Cocina</span></li>
+                    <li>
+                        <a href="{{ path('alergeno_index') }}" class="{% if activeRoute == 'alergeno' %}active{% endif %}"><i class="fa fa-exclamation-triangle"></i><span class="sidebar-mini-hide">Alérgeno</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('producto_index') }}" class="{% if activeRoute == 'producto' %}active{% endif %}"><i class="fa fa-lemon-o"></i><span class="sidebar-mini-hide">Producto</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('partida_index') }}" class="{% if activeRoute == 'partida' %}active{% endif %}"><i class="fa fa-truck"></i><span class="sidebar-mini-hide">Partida</span></a>
+                    </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_COCINERO') %}
+                    <li class="nav-main-heading"><span class="sidebar-mini-hide">Plato</span></li>
+                    <li>
+                        <a href="{{ path('plato_index') }}" class="{% if activeRoute == 'plato' %}active{% endif %}"><i class="fa fa-cutlery"></i><span class="sidebar-mini-hide">Plato</span></a>
+                    </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMINISTRADOR') %}
+                    <li>
+                        <a href="{{ path('familia_index') }}" class="{% if activeRoute == 'familia' %}active{% endif %}"><i class="fa fa-leaf"></i><span class="sidebar-mini-hide">Familia</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('subfamilia_index') }}" class="{% if activeRoute == 'subfamilia' %}active{% endif %}"><i class="fa fa-coffee"></i><span class="sidebar-mini-hide">Subfamilia</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('tipo_index') }}" class="{% if activeRoute == 'tipo' %}active{% endif %}"><i class="fa fa-spoon"></i><span class="sidebar-mini-hide">Tipo</span></a>
+                    </li>
+                    <li class="nav-main-heading"><span class="sidebar-mini-hide">Proveedor</span></li>
+                    <li>
+                        <a href="{{ path('proveedor_index') }}" class="{% if activeRoute == 'proveedor' %}active{% endif %}"><i class="fa fa-handshake-o"></i><span class="sidebar-mini-hide">Proveedor</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('formatocompra_index') }}" class="{% if activeRoute == 'formatocompra' %}active{% endif %}"><i class="fa fa-shopping-basket"></i><span class="sidebar-mini-hide">Formato de compra</span></a>
+                    </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_COMERCIAL') %}
+                    <li class="nav-main-heading"><span class="sidebar-mini-hide">Evento</span></li>
+                    <li>
+                        <a href="{{ path('evento_index') }}" class="{% if activeRoute == 'evento' %}active{% endif %}"><i class="fa fa-calendar"></i><span class="sidebar-mini-hide">Evento</span></a>
+                    </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMINISTRADOR') %}
+                    <li>
+                        <a href="{{ path('produccion_index') }}" class="{% if activeRoute == 'produccion' %}active{% endif %}"><i class="fa fa-calendar-o"></i><span class="sidebar-mini-hide">Producción</span></a>
+                    </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMINISTRADOR') %}
+                    <li class="nav-main-heading"><span class="sidebar-mini-hide">Usuario</span></li>
+                    <li>
+                        <a href="{{ path('user_index') }}" class="{% if activeRoute == 'user' %}active{% endif %}"><i class="fa fa-user-o"></i><span class="sidebar-mini-hide">Usuario</span></a>
+                    </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMINISTRADOR') %}
+                    <li class="nav-main-heading"><span class="sidebar-mini-hide">Informe</span></li>
+                    <li>
+                        <a href="{{ path('informe_escandallo_form') }}" class="{% if activeRoute == 'informe_escandallo' %}active{% endif %}"><i class="fa fa-file-text-o"></i><span class="sidebar-mini-hide">Escandallo</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('informe_partidas_form') }}" class="{% if activeRoute == 'informe_partidas' %}active{% endif %}"><i class="fa fa-flag-checkered"></i><span class="sidebar-mini-hide">Informe por partidas</span></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <!-- END Side Content -->
+        </div>
+        <!-- Sidebar Content -->
+    </div>
+    <!-- END Sidebar Scroll Container -->
+</nav>
+<!-- END Sidebar -->
+#}

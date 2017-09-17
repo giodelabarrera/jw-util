@@ -1,0 +1,19 @@
+{% form_theme filter_form 'bootstrap_3_horizontal_layout.html.twig'  %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="block filters-block filter-form" {% if app.request.get(filter_form.vars.name) is empty %}style="display:none"{% endif %}>
+            <div class="block-content">
+                {{ form_start(filter_form) }}
+                    {{ form_widget(filter_form) }}
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-7">
+                            <button class="btn btn-sm btn-primary push-5-r" type="submit">Filtrar</button>
+                            <a href="{{ clear_path }}" class="btn btn-sm btn-default">Limpiar</a>
+                        </div>
+                    </div>
+                {{ form_end(filter_form) }}
+            </div>
+        </div>
+    </div>
+</div>

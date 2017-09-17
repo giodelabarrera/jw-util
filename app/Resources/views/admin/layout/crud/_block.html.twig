@@ -1,0 +1,21 @@
+
+<div class="block {% block block_class %}block-rounded{% endblock block_class %}">
+    {% block block_header %}
+        <div class="block-header {% block block_header_class %}bg-gray-lighter{% endblock block_header_class %}">
+            {% block block_header_options %}{% endblock block_header_options %}
+            <h3 class="block-title">{% block block_header_title %}Block Title{% endblock block_header_title %}</h3>
+        </div>
+    {% endblock block_header %}
+    <div class="block-content">
+        {% block block_content %}
+            <p>With header background..</p>
+        {% endblock block_content %}
+    </div>
+    {% block block_footer %}
+        <div class="block-footer {% block block_footer_class %}block-content block-content-full remove-padding-t{% endblock block_footer_class %}">
+            <div class="text-center">
+                {% block block_footer_pagination %}{% endblock block_footer_pagination %}
+            </div>
+        </div>
+    {% endblock block_footer %}
+</div>

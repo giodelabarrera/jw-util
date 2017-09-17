@@ -1,0 +1,60 @@
+label.required:after {
+    color: #d26a5c;
+    content: " *";
+}
+table .img-link {
+    max-width: 45px;
+}
+textarea.form-control {
+    height: 200px;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th {
+    padding: 12px 10px 12px;
+    text-transform: capitalize;
+}
+.pagination {
+    margin: 0;
+}
+
+
+th.list-order-desc a, th.list-order-asc a {
+    position: relative;
+    margin-right: 10px;
+}
+th.list-order-asc a:hover:after,
+th.list-order-asc.sorted a:after,
+th.list-order-desc.sorted a:hover:after {
+    content: "";
+    display: block;
+    border-top: 4px solid #5c90d2;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    margin-top: -1px;
+}
+th.list-order-desc a:hover:after,
+th.list-order-desc.sorted a:after,
+th.list-order-asc.sorted a:hover:after {
+    content: "";
+    display: block;
+    border-bottom: 4px solid #5c90d2;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    border-top: 4px solid transparent;
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    margin-top: -5px;
+}
+
+
+
+/*.nav-main li.active a, .nav-main li.active a:hover {*/
+    /*color: #fff;*/
+/*}*/
+/*.nav-main li.active a > i, .nav-main li.active a:hover > i {*/
+    /*color: #fff;*/
+/*}*/

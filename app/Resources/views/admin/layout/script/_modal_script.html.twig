@@ -1,0 +1,285 @@
+{# dependencias #}
+{# ajax-form #}
+<script type="text/javascript">
+
+    var admin_dialog = false;
+    var admin_dialog_content = false;
+    var admin_dialog_title = false;
+
+    // handle the list link
+    var admin_dialog_form_list = function(event) {
+
+        admin_initialize_popup();
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var a = jQuery(this);
+
+        admin_dialog_content.html('');
+
+        // retrieve the form element from the related admin generator
+        jQuery.ajax({
+            url: a.attr('href'),
+            dataType: 'html',
+            success: function(html) {
+
+                // populate the popup container
+                admin_dialog_content.html(html);
+
+                admin_dialog_title.html(a.attr('data-dialog-title'));
+
+                admin_dialog_form_list_handle_action();
+
+                // open the dialog in modal mode
+                admin_dialog.modal();
+            }
+        });
+    };
+
+    // this function handle action on the modal list when inside a selected list
+    var admin_dialog_form_list_handle_action = function() {
+
+        // capture the submit event to make an ajax call, ie : POST data to the
+        // related create admin
+        jQuery('a', admin_dialog).on('click', admin_dialog_form_list_link);
+        jQuery('form', admin_dialog).on('submit', function(event) {
+            event.preventDefault();
+
+            var form = jQuery(this);
+
+            jQuery(form).ajaxSubmit({
+                type: form.attr('method'),
+                url: form.attr('action'),
+                dataType: 'html',
+                data: {_xml_http_request: true},
+                success: function(html) {
+                    admin_dialog_content.html(html);
+                    admin_dialog_form_list_handle_action();
+                }
+            });
+        });
+    };
+
+    {#
+      handle link click in a list :
+        - if the parent has an objectId defined then the related input get updated
+        - if the parent has NO object then an ajax request is made to refresh the popup
+    #}
+    var admin_dialog_form_list_link = function(event) {
+        admin_initialize_popup();
+
+        var target = jQuery(this);
+
+        // return if the link is an anchor inside the same page
+        if (this.nodeName == 'A' && (target.attr('href').length == 0 || target.attr('href')[0] == '#')) {
+            return;
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        // make a recursive call (ie: reset the filter)
+        jQuery.ajax({
+            type: 'GET',
+            url: jQuery(this).attr('href'),
+            dataType: 'html',
+            success: function(html) {
+                admin_dialog_content.html(html);
+                admin_dialog_form_list_handle_action();
+            }
+        });
+        return;
+
+        /*var element = jQuery(this).parents('#admin_dialog td');
+        // the user does not click on a row column
+        if (element.length == 0) {
+            // make a recursive call (ie: reset the filter)
+            jQuery.ajax({
+                type: 'GET',
+                url: jQuery(this).attr('href'),
+                dataType: 'html',
+                success: function(html) {
+                    admin_dialog_content.html(html);
+                    admin_dialog_form_list_handle_action();
+                }
+            });
+            return;
+        }*/
+
+        {#// AQUI hacer alert con confirmacion#}
+
+        {#jQuery('#{{ ottUsuario.id }}').val($(this).data('id'));#}
+        {#jQuery('#{{ ottUsuario.id }}').trigger('change');#}
+
+        {#admin_dialog.modal('hide');#}
+    };
+
+    // handle the form edit link
+    var admin_dialog_form = function(event) {
+        admin_initialize_popup();
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var a = jQuery(this);
+
+        admin_dialog_content.html('');
+
+        // retrieve the form element from the related admin generator
+        jQuery.ajax({
+            url: a.attr('href'),
+            dataType: 'html',
+            success: function(html) {
+
+                // populate the popup container
+                admin_dialog_content.html(html);
+                admin_dialog_title.html(a.attr('data-dialog-title'));
+
+                // capture the submit event to make an ajax call, ie : POST data to the
+                // related create admin
+                jQuery('a', admin_dialog).on('click', admin_dialog_form_action);
+                jQuery('form', admin_dialog).on('submit', admin_dialog_form_action);
+
+                // open the dialog in modal mode
+                admin_dialog.modal();
+            }
+        });
+    };
+
+    // handle the post data
+    var admin_dialog_form_action = function(event) {
+
+        var element = jQuery(this);
+
+        // return if the link is an anchor inside the same page
+        if (this.nodeName == 'A' && (element.attr('href').length == 0 || element.attr('href')[0] == '#')) {
+            return
+        }
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        admin_initialize_popup();
+
+        var url, type;
+        if (this.nodeName == 'FORM') {
+            url  = element.attr('action');
+            type = element.attr('method');
+        } else if (this.nodeName == 'A') {
+            url  = element.attr('href');
+            type = 'GET';
+            if (element.hasClass('no-modal')) {
+                if (element.attr('target') && element.attr('target') == '_blank')
+                    window.open(element.attr('href'));
+                else
+                    window.location.href = element.attr('href');
+                return;
+            }
+            admin_dialog_title.html(element.attr('data-dialog-title'));
+        } else {
+            alert('unexpected element : @' + this.nodeName + '@');
+            return;
+        }
+
+        if (element.hasClass('ott-modal-action')) {
+            return;
+        }
+
+        var data = {
+            _xml_http_request: true
+        }
+
+        var form = jQuery(this);
+
+        // the ajax post
+        jQuery(form).ajaxSubmit({
+            url: url,
+            type: type,
+            data: data,
+            success: function(data) {
+
+                // if the crud action return ok, then the element has been added
+                // so the widget container must be refresh with the last option available
+                if (typeof data != 'string' && data.status == 'OK') {
+                    admin_dialog.modal('hide');
+                    // reload page
+                    window.location.reload();
+                    return;
+                }
+
+                // otherwise, display form error
+                admin_dialog_content.html(data);
+
+                // reattach the event
+                jQuery('form', admin_dialog).submit(admin_dialog_form_action);
+            }
+        });
+
+        return false;
+    };
+
+
+    // Functions
+
+    function admin_initialize_popup()
+    {
+        // initialize component
+        if (!admin_dialog) {
+            admin_dialog          = jQuery("#admin_dialog");
+//            admin_dialog_content  = jQuery(".modal-body", "#admin_dialog");
+//            admin_dialog_title    = jQuery(".modal-title", "#admin_dialog");
+            admin_dialog_content  = jQuery(".block-content", "#admin_dialog");
+            admin_dialog_title    = jQuery(".block-title", "#admin_dialog");
+
+            // move the dialog as a child of the root element, nested form breaks html ...
+            jQuery(document.body).append(admin_dialog);
+        }
+    }
+
+    {#
+        This code is used to defined the "list" popup
+    #}
+    // this function initialize the popup
+    // this can be only done this way has popup can be cascaded
+    function start_admin_dialog_form_list(link)
+    {
+        link.onclick = null;
+        admin_initialize_popup();
+
+        // add title by default
+        if (!jQuery(link).attr('data-dialog-title'))
+            jQuery(link).attr('data-dialog-title', jQuery(link).text());
+
+        // add the jQuery event to the a element
+        jQuery(link)
+                .click(admin_dialog_form_list)
+                .trigger('click')
+        ;
+        return false;
+    }
+
+    {#
+        This code is used to defined the "form" popup
+    #}
+    // this function initialize the popup
+    // this can be only done this way has popup can be cascaded
+    function start_admin_dialog_form(link)
+    {
+        // remove the html event
+        link.onclick = null;
+        admin_initialize_popup();
+
+        // add title by default
+        if (!jQuery(link).attr('data-dialog-title'))
+            jQuery(link).attr('data-dialog-title', jQuery(link).text());
+
+        // add the jQuery event to the a element
+        jQuery(link)
+                .click(admin_dialog_form)
+                .trigger('click')
+        ;
+        return false;
+    }
+
+</script>

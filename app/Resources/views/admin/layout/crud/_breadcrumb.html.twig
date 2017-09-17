@@ -1,0 +1,36 @@
+
+<ol class="breadcrumb push-10-t">
+    {% set breadcrumb = {} %}
+    {% if action == 'list' %}
+        {% set breadcrumb = {
+        '<i class="fa fa-home"></i>': path('admin_dashboard'),
+        (entity_name): path(route_prefix ~ '_index'),
+        'List': '#'
+        } %}
+    {% elseif action == 'show' or action == 'delete' %}
+        {% set breadcrumb = {
+        '<i class="fa fa-home"></i>': path('admin_dashboard'),
+        (entity_name): path(route_prefix ~ '_index'),
+        (entity.__toString): '#'
+        } %}
+    {% elseif action == 'new' %}
+        {% set breadcrumb = {
+        '<i class="fa fa-home"></i>': path('admin_dashboard'),
+        (entity_name): path(route_prefix ~ '_index'),
+        'Create': '#'
+        } %}
+    {% elseif action == 'edit' %}
+        {% set breadcrumb = {
+        '<i class="fa fa-home"></i>': path('admin_dashboard'),
+        (entity_name): path(route_prefix ~ '_index'),
+        (entity.__toString): '#'
+        } %}
+    {% endif %}
+    {% for name, url in breadcrumb %}
+        {% if loop.last %}
+            <li>{{ name|raw }}</li>
+        {% else %}
+            <li><a class="link-effect" href="{{ url }}">{{ name|raw }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ol>

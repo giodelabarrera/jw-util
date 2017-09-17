@@ -1,0 +1,18 @@
+
+<!-- Page Header -->
+{#<div class="content bg-gray-lighter {% block page_header_class %}content-mini{% endblock page_header_class %}">#}
+<div class="content bg-gray-lighter {% block page_header_class %}{% endblock page_header_class %}">
+    <div class="row items-push">
+        <div class="{% block page_header_col_class %}col-sm-7{% endblock page_header_col_class %}">
+            <h1 class="page-heading">
+                {% block page_heading %}Title{% endblock page_heading %}
+            </h1>
+        </div>
+        {% block page_header_col_right %}
+            <div class="{% block page_header_col_right_class %}col-sm-5 text-right hidden-xs{% endblock page_header_col_right_class %}">
+                {% block breadcrumb %}{% endblock breadcrumb %}
+            </div>
+        {% endblock page_header_col_right %}
+    </div>
+</div>
+<!-- END Page Header -->

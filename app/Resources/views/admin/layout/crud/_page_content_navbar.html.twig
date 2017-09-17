@@ -1,0 +1,48 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <nav class="navbar navbar-default" role="navigation" style="width: auto;">
+            <div class="container-fluid">
+                <div class="navbar-collapse">
+                    <div class="navbar-left"></div>
+
+                    {% if action == 'list' %}
+                        {% if actions.create is defined and actions.create == true %}
+                            <ul class="nav navbar-nav navbar-right">
+                                {{ include('admin/layout/button/_create_button.html.twig') }}
+                            </ul>
+                        {% endif %}
+                        {% if actions.filter is defined and actions.filter == true %}
+                            <ul class="nav navbar-nav navbar-right">
+                                {{ include('admin/layout/button/_filter_button.html.twig') }}
+                            </ul>
+                        {% endif %}
+                    {% elseif action in ['show', 'new', 'edit', 'delete'] %}
+                        {% if actions is not empty %}
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown sonata-actions">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Actions <b class="caret"></b></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        {% if actions.create is defined and actions.create == true %}
+                                            {{ include('admin/layout/button/_create_button.html.twig') }}
+                                        {% endif %}
+                                        {% if actions.show is defined and actions.show == true %}
+                                            {{ include('admin/layout/button/_show_button.html.twig') }}
+                                        {% endif %}
+                                        {% if actions.edit is defined and actions.edit == true %}
+                                            {{ include('admin/layout/button/_edit_button.html.twig') }}
+                                        {% endif %}
+                                        {% if actions.list is defined and actions.list == true %}
+                                            {{ include('admin/layout/button/_list_button.html.twig') }}
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                            </ul>
+                        {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

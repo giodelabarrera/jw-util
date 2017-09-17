@@ -1,0 +1,87 @@
+{# dependencias #}
+{# bootstrap-notify #}
+<script type="text/javascript">
+    $(function(){
+
+        function app_notify_flash_message(content, options)
+        {
+            jQuery.notify({
+                        icon: content.icon,
+                        message: content.message,
+                        url: content.url
+                    },
+                    {
+                        element: 'body',
+                        type: options.type,
+                        allow_dismiss: true,
+                        newest_on_top: true,
+                        showProgressbar: false,
+                        placement: {
+                            from: options.from,
+                            align: options.align
+                        },
+                        offset: 20,
+                        spacing: 10,
+                        z_index: 1031,
+                        delay: 5000,
+                        timer: 1000,
+                        animate: {
+                            enter: 'animated fadeIn',
+                            exit: 'animated fadeOutDown'
+                        }
+                    });
+        }
+
+        {# info #}
+        {% for flashMessage in app.session.flashbag.get('info') %}
+        app_notify_flash_message({
+            icon: 'fa info-circle',
+            message: '{{ flashMessage }}',
+            url: ''
+        }, {
+            type: 'info',
+            from: 'top',
+            align: 'right'
+        });
+        {% endfor %}
+
+        {# success #}
+        {% for flashMessage in app.session.flashbag.get('success') %}
+        app_notify_flash_message({
+            icon: 'fa fa-check',
+            message: '{{ flashMessage }}',
+            url: ''
+        }, {
+            type: 'success',
+            from: 'top',
+            align: 'right'
+        });
+        {% endfor %}
+
+        {# warning #}
+        {% for flashMessage in app.session.flashbag.get('warning') %}
+        app_notify_flash_message({
+            icon: 'fa fa-warning',
+            message: '{{ flashMessage }}',
+            url: ''
+        }, {
+            type: 'warning',
+            from: 'top',
+            align: 'right'
+        });
+        {% endfor %}
+
+        {# error #}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+        app_notify_flash_message({
+            icon: 'fa fa-times',
+            message: '{{ flashMessage }}',
+            url: ''
+        }, {
+            type: 'error',
+            from: 'top',
+            align: 'right'
+        });
+        {% endfor %}
+    });
+</script>

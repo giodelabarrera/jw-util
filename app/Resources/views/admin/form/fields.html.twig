@@ -1,0 +1,141 @@
+{% block color_picker_widget %}
+    <div class="js-colorpicker input-group">
+        {{ block('form_widget') }}
+        <span class="input-group-addon"><i></i></span>
+    </div>
+{% endblock %}
+
+{% block checkbox_widget -%}
+    <label class="css-input css-checkbox css-checkbox-primary">
+        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /><span></span> {{ block('form_label') }}
+    </label>
+{%- endblock checkbox_widget %}
+
+{% block choice_widget_expanded -%}
+    {% if '-inline' in label_attr.class|default('') -%}
+        {%- for child in form %}
+            {{- form_widget(child, {
+                parent_label_class: label_attr.class|default(''),
+                translation_domain: choice_translation_domain,
+            }) -}}
+        {% endfor -%}
+    {%- else -%}
+        <div {{ block('widget_container_attributes') }}>
+            {%- for child in form %}
+                <div>
+                    {{- form_widget(child, {
+                        parent_label_class: label_attr.class|default(''),
+                        translation_domain: choice_translation_domain,
+                    }) -}}
+                </div>
+            {% endfor -%}
+        </div>
+    {%- endif %}
+{%- endblock choice_widget_expanded %}
+
+{% block datetimepicker_widget -%}
+    {% if widget == 'single_text' %}
+
+        {% if attr.format is defined %}
+            {% set format = attr.format %}
+        {% else %}
+            {% set format = 'YYYY-MM-DD HH:mm:ss' %}
+            {% set format = attr.format %}
+        {% endif %}
+
+        {% if attr.locale is defined %}
+            {% set locale = attr.locale %}
+        {% else %}
+            {% set locale = 'en' %}
+        {% endif %}
+
+        <div class="js-datetimepicker input-group date" data-format="{{ format }}" data-locale="{{ locale }}" data-show-today-button="true" data-show-clear="true" data-show-close="true">
+            {{- block('form_widget_simple') -}}
+            <span class="input-group-addon">
+                <span class="fa fa-calendar push-5-r"></span><span class="fa fa-clock-o"></span>
+            </span>
+        </div>
+
+    {% else -%}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-inline')|trim}) -%}
+        <div {{ block('widget_container_attributes') }}>
+            {{- form_errors(form.date) -}}
+            {{- form_errors(form.time) -}}
+            {{- form_widget(form.date, { datetime: true, 'attr': {'class': 'js-datetimepicker'} } ) -}}
+            {{- form_widget(form.time, { datetime: true } ) -}}
+        </div>
+    {%- endif %}
+{%- endblock datetimepicker_widget %}
+
+{% block datepicker_widget -%}
+    {% if widget == 'single_text' %}
+
+        {% if attr.format is defined %}
+            {% set format = attr.format %}
+        {% else %}
+            {% set format = "YYYY-MM-DD" %}
+        {% endif %}
+
+        {% if attr.locale is defined %}
+            {% set locale = attr.locale %}
+        {% else %}
+            {% set locale = "en" %}
+        {% endif %}
+
+        <div class="js-datetimepicker input-group date" data-format="{{ format }}" data-locale="{{ locale }}" data-show-today-button="true" data-show-clear="true" data-show-close="true">
+            {{- block('form_widget_simple') -}}
+            <span class="input-group-addon">
+                <span class="fa fa-calendar"></span>
+            </span>
+        </div>
+    {% else -%}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-inline')|trim}) -%}
+        <div {{ block('widget_container_attributes') }}>
+            {{- form_errors(form.date) -}}
+            {{- form_widget(form.date, { datetime: true, 'attr': {'class': 'js-datetimepicker'} } ) -}}
+        </div>
+    {%- endif %}
+{%- endblock datepicker_widget %}
+
+{% block phone_widget -%}
+    <div class="input-group">
+        {{- block('form_widget_simple') -}}
+        <span class="input-group-addon"><span class="fa fa-phone"></span></span>
+    </div>
+{%- endblock phone_widget %}
+
+{%- block email_widget -%}
+    {%- set type = type|default('email') -%}
+    <div class="input-group">
+        {{- block('form_widget_simple') -}}
+        <span class="input-group-addon"><span class="fa fa-envelope-o"></span></span>
+    </div>
+{%- endblock email_widget -%}
+
+{%- block number_widget -%}
+    {# type="number" doesn't work with floats #}
+    {%- set type = type|default('text') -%}
+    {{ block('form_widget_simple') }}
+    {% for attrname,attrvalue in attr %}
+        {% if attrname == 'help' %}
+            <span class="help-block">{{ attrvalue }}</span>{% endif %}
+    {% endfor %}
+{%- endblock number_widget -%}
+
+{#{% block vich_image_widget %}
+    {% spaceless %}
+        <div class="vich-image">
+            {% if form.delete is defined %}
+                {{ form_row(form.delete) }}
+            {% endif %}
+
+            {% if download_uri is defined and download_uri %}
+                <a class="img-link img-thumb col-sm-4" href="{{ download_uri }}"><img class="img-responsive" src="{{ download_uri }}" alt="" /></a>
+            {% endif %}
+            {% if show_download_link and download_uri is defined and download_uri%}
+                <a href="{{ download_uri }}">{{ 'download'|trans({}, 'VichUploaderBundle') }}</a>
+            {% endif %}
+            {{ form_widget(form.file, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    {% endspaceless %}
+{% endblock %}#}
