@@ -70,13 +70,13 @@ class MenuBuilder
         ]);
         $menu->addChild('microfono', [
             'label' => 'Micrófono',
-            'uri' => '#',
+            'route' => 'admin_programa_microfono',
             'attributes' => ['icon' => 'fa fa-user'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
         $menu->addChild('sonido', [
             'label' => 'Sonido',
-            'uri' => '#',
+            'route' => 'admin_programa_sonido',
             'attributes' => ['icon' => 'fa fa-user'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);

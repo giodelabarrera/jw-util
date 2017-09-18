@@ -1,0 +1,9 @@
+
+Microfono
+
+- dias de asamblea (array)
+- dias de visita super (array)
+- fecha fin (datepicker) - para calcular cuantas semanas
+
+-- opcional
+- ultimos usuarios que les toco (entity multiple)

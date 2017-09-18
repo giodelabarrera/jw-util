@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% set entity_name = 'Sonido' %}
+{#{% set route_prefix = 'admin_departamento' %}#}
+{#{% set action = 'list' %}#}
+{#{% set actions = {'create': true, 'filter': true} %}#}
+
+{% block title %}{{ entity_name }}{% endblock %}
+
+{% block page_header %}
+    {% embed 'admin/layout/crud/_page_header.html.twig' %}
+        {% block page_heading %}{{ entity_name }}{% endblock %}
+        {% block breadcrumb %}
+            {{ include('admin/layout/crud/_breadcrumb.html.twig') }}
+        {% endblock breadcrumb %}
+    {% endembed %}
+{% endblock page_header %}
+
+{% block page_content_nav %}
+{% endblock page_content_nav %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-lg-12">
+            {% embed 'admin/layout/crud/_block.html.twig' %}
+
+                {% block block_header_title %}{{ entity_name }}{% endblock %}
+
+                {% block block_content %}
+                {% endblock %}
+
+                {% block block_footer %}
+                {% endblock %}
+
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}
