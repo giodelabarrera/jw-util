@@ -1,0 +1,45 @@
+{% extends 'admin/base.html.twig' %}
+
+{% set entity_name = 'Asignacion' %}
+{% set route_prefix = 'admin_asignacion' %}
+{% set action = 'new' %}
+{% set actions = {
+'list': true,
+} %}
+
+{% block page_header %}
+    {% embed 'admin/layout/crud/_page_header.html.twig' %}
+        {% block page_heading %}{{ entity_name }}{% endblock %}
+        {% block breadcrumb %}
+            {{ include('admin/layout/crud/_breadcrumb.html.twig') }}
+        {% endblock breadcrumb %}
+    {% endembed %}
+{% endblock page_header %}
+
+{% block page_content_nav %}
+    {{ include('admin/layout/crud/_page_content_navbar.html.twig') }}
+{% endblock page_content_nav %}
+
+{% block page_content %}
+
+    {{ form_start(form, {
+        'attr': {'novalidate': 'novalidate'}
+    }) }}
+    <div class="row">
+        <div class="col-lg-12">
+            {% embed 'admin/layout/crud/_block.html.twig' %}
+
+                {% block block_header_title %}{{ entity_name }}{% endblock %}
+
+                {% block block_content %}
+                    {{ form_widget(form) }}
+                {% endblock %}
+
+                {% block block_footer %}{% endblock %}
+
+            {% endembed %}
+        </div>
+    </div>
+    {{ include('admin/layout/crud/_form_actions.html.twig') }}
+    {{ form_end(form) }}
+{% endblock %}

@@ -42,7 +42,7 @@ class LoadUser extends AbstractFixture implements OrderedFixtureInterface, Conta
             [
                 'name' => 'Giorgio',
                 'surname' => 'De la Barrera',
-                'username' => 'giodelabarrera',
+                'username' => 'giorgiodelabarrera',
                 'email' => 'giodelabarrera@gmail.com',
                 'password' => '12345678',
                 'phone' => '',
@@ -59,13 +59,13 @@ class LoadUser extends AbstractFixture implements OrderedFixtureInterface, Conta
             [
                 'name' => 'Jairo',
                 'surname' => 'Santamaria',
-                'username' => 'jsantamaria',
+                'username' => 'jairosantamaria',
                 'password' => '12345678',
             ],
             [
                 'name' => 'Joan',
                 'surname' => 'Aguilere',
-                'username' => 'jaguilere',
+                'username' => 'joanaguilere',
                 'password' => '12345678',
                 'phone' => '680252682'
             ],
@@ -78,13 +78,13 @@ class LoadUser extends AbstractFixture implements OrderedFixtureInterface, Conta
             [
                 'name' => 'Antonio',
                 'surname' => 'Valverde',
-                'username' => 'avalverde',
+                'username' => 'antoniovalverde',
                 'password' => '12345678',
             ],
             [
                 'name' => 'Javier',
                 'surname' => 'Mata',
-                'username' => 'javimata',
+                'username' => 'javiermata',
                 'password' => '12345678',
             ],
             [
@@ -102,7 +102,7 @@ class LoadUser extends AbstractFixture implements OrderedFixtureInterface, Conta
             [
                 'name' => 'Daniel',
                 'surname' => 'Yovanovich',
-                'username' => 'dyovanovich',
+                'username' => 'danielyovanovich',
                 'password' => '12345678',
             ],
             [
@@ -120,7 +120,7 @@ class LoadUser extends AbstractFixture implements OrderedFixtureInterface, Conta
             [
                 'name' => 'Juan C',
                 'surname' => 'Cárdenas',
-                'username' => 'juancardenas',
+                'username' => 'juanccardenas',
                 'password' => '12345678',
             ],
             [
@@ -150,7 +150,7 @@ class LoadUser extends AbstractFixture implements OrderedFixtureInterface, Conta
             [
                 'name' => 'Pedro',
                 'surname' => 'Santamaría',
-                'username' => 'psantamaria',
+                'username' => 'pedrosantamaria',
                 'password' => '12345678',
             ],
         ];

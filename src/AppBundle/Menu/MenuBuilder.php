@@ -50,9 +50,15 @@ class MenuBuilder
             'attributes' => ['icon' => 'fa fa-user'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
+        $menu->addChild('departamento', [
+            'label' => 'Departamento',
+            'route' => 'admin_departamento_index',
+            'attributes' => ['icon' => 'fa fa-user'],
+            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
+        ]);
         $menu->addChild('asignacion', [
             'label' => 'Asignación',
-            'uri' => '#',
+            'route' => 'admin_asignacion_index',
             'attributes' => ['icon' => 'fa fa-user'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
