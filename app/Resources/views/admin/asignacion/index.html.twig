@@ -40,9 +40,9 @@
                             <tr>
                                 <th class="text-center" style="width: 100px;">Actions</th>
                                 <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('a.id') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'ID', 'a.id') }}</th>
-                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('a.user') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'User', 'a.user') }}</th>
-                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('a.departamento') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Departamento', 'a.departamento') }}</th>
-                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('a.cargo') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Cargo', 'a.cargo') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('a.hermano') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Hermano', 'a.hermano') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('a.privilegio') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Privilegio', 'a.privilegio') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('a.fecha') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Fecha', 'a.fecha') }}</th>
                                 <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('a.created') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Created', 'a.created') }}</th>
                                 <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('a.updated') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Updated', 'a.updated') }}</th>
                             </tr>
@@ -57,9 +57,9 @@
                                         </div>
                                     </td>
                                     <td><a href="{{ path('admin_asignacion_show', {'id': asignacion.id}) }}">{{ asignacion.id }}</a></td>
-                                    <td>{{ asignacion.user }}</td>
-                                    <td>{{ asignacion.departamento }}</td>
-                                    <td>{{ asignacion.cargo }}</td>
+                                    <td>{{ asignacion.hermano }}</td>
+                                    <td>{{ asignacion.privilegio }}</td>
+                                    <td>{{ asignacion.fecha | date('d-m-Y') }}</td>
                                     <td>{{ asignacion.created | date('d-m-Y H:i:s') }}</td>
                                     <td>{{ asignacion.updated | date('d-m-Y H:i:s') }}</td>
                                 </tr>

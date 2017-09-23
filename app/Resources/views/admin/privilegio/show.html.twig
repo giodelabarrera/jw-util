@@ -1,14 +1,14 @@
 {% extends 'admin/base.html.twig' %}
 
-{% set entity_name = 'Asignacion' %}
-{% set route_prefix = 'admin_asignacion' %}
+{% set entity_name = 'Privilegio' %}
+{% set route_prefix = 'admin_privilegio' %}
 {% set action = 'show' %}
 {% set actions = {
 'create': true,
 'edit': true,
 'list': true,
 } %}
-{% set entity = asignacion %}
+{% set entity = privilegio %}
 
 {% block page_header %}
     {% embed 'admin/layout/crud/_page_header.html.twig' %}
@@ -36,27 +36,19 @@
                         <tbody>
                         <tr>
                             <th style="width: 130px">Id</th>
-                            <td>{{ asignacion.id }}</td>
+                            <td>{{ privilegio.id }}</td>
                         </tr>
                         <tr>
-                            <th>Hermano</th>
-                            <td>{{ asignacion.hermano }}</td>
-                        </tr>
-                        <tr>
-                            <th>Privilegio</th>
-                            <td>{{ asignacion.privilegio }}</td>
-                        </tr>
-                        <tr>
-                            <th>Fecha</th>
-                            <td>{% if asignacion.fecha %}{{ asignacion.fecha|date('Y-m-d') }}{% endif %}</td>
+                            <th>Nombre</th>
+                            <td>{{ privilegio.nombre }}</td>
                         </tr>
                         <tr>
                             <th>Created</th>
-                            <td>{% if asignacion.created %}{{ asignacion.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{% if privilegio.created %}{{ privilegio.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                         </tr>
                         <tr>
                             <th>Updated</th>
-                            <td>{% if asignacion.updated %}{{ asignacion.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{% if privilegio.updated %}{{ privilegio.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
                         </tr>
                         </tbody>
                     </table>

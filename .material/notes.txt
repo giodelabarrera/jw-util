@@ -7,3 +7,20 @@ Microfono
 
 -- opcional
 - ultimos usuarios que les toco (entity multiple)
+
+
+
+
+Hermano
+
+Privilegio
+    - Sonido
+    - Microfono
+    - Responsable de plataforma
+    - Auxiliar de plataforma
+    - Responsable de sonido
+    - Literatura
+    - Territorios
+    - Responsable de limpieza
+    - Anciano
+    - Siervo

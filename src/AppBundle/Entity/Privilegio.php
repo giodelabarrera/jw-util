@@ -5,14 +5,17 @@ namespace AppBundle\Entity;
 use AppBundle\Model\Entity\DateStampEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * Departamento
+ * Privilegio
  *
- * @ORM\Table(name="departamento")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\DepartamentoRepository")
+ * @ORM\Table(name="privilegio")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PrivilegioRepository")
+ * @UniqueEntity("slug")
  */
-class Departamento extends DateStampEntity
+class Privilegio extends DateStampEntity
 {
     /**
      * @var int
@@ -27,19 +30,26 @@ class Departamento extends DateStampEntity
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $nombre;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
+     * @Gedmo\Slug(fields={"nombre"}, updatable=false)
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Hermano", mappedBy="privilegios")
+     */
+    private $hermanos;
+
 
     /**
-     * Departamento constructor.
+     * Privilegio constructor.
      */
     public function __construct()
     {
@@ -69,7 +79,7 @@ class Departamento extends DateStampEntity
      *
      * @param string $nombre
      *
-     * @return Departamento
+     * @return Privilegio
      */
     public function setNombre($nombre)
     {
@@ -93,7 +103,7 @@ class Departamento extends DateStampEntity
      *
      * @param string $slug
      *
-     * @return Departamento
+     * @return Privilegio
      */
     public function setSlug($slug)
     {
@@ -110,5 +120,39 @@ class Departamento extends DateStampEntity
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Add hermano
+     *
+     * @param \AppBundle\Entity\Hermano $hermano
+     *
+     * @return Privilegio
+     */
+    public function addHermano(\AppBundle\Entity\Hermano $hermano)
+    {
+        $this->hermanos[] = $hermano;
+
+        return $this;
+    }
+
+    /**
+     * Remove hermano
+     *
+     * @param \AppBundle\Entity\Hermano $hermano
+     */
+    public function removeHermano(\AppBundle\Entity\Hermano $hermano)
+    {
+        $this->hermanos->removeElement($hermano);
+    }
+
+    /**
+     * Get hermanos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHermanos()
+    {
+        return $this->hermanos;
     }
 }

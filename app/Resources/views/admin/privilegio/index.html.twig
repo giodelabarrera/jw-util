@@ -1,7 +1,7 @@
 {% extends 'admin/base.html.twig' %}
 
-{% set entity_name = 'Departamento' %}
-{% set route_prefix = 'admin_departamento' %}
+{% set entity_name = 'Privilegio' %}
+{% set route_prefix = 'admin_privilegio' %}
 {% set action = 'list' %}
 {% set actions = {'create': true, 'filter': true} %}
 
@@ -20,7 +20,7 @@
     {{ include('admin/layout/crud/_page_content_navbar.html.twig') }}
     {{ include('admin/layout/form/_filters_form.html.twig', {
         'filter_form': filter_form,
-        'clear_path': path('admin_departamento_index'),
+        'clear_path': path('admin_privilegio_index'),
     })}}
 {% endblock page_content_nav %}
 
@@ -39,25 +39,27 @@
                             <thead>
                             <tr>
                                 <th class="text-center" style="width: 100px;">Actions</th>
-                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('d.id') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'ID', 'd.id') }}</th>
-                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('d.nombre') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Nombre', 'd.nombre') }}</th>
-                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('d.created') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Created', 'd.created') }}</th>
-                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('d.updated') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Updated', 'd.updated') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('t.id') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'ID', 't.id') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('t.nombre') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Nombre', 't.nombre') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('t.slug') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Slug', 't.slug') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('t.created') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Created', 't.created') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('t.updated') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Updated', 't.updated') }}</th>
                             </tr>
                             </thead>
                             <tbody>
-                            {% for departamento in pagination %}
+                            {% for privilegio in pagination %}
                                 <tr>
                                     <td class="text-center">
                                         <div class="btn-group">
-                                            <a class="btn btn-xs btn-default" data-toggle="tooltip" title="Editar" href="{{ path('admin_departamento_edit', {'id': departamento.id}) }}"><i class="fa fa-pencil"></i></a>
-                                            <a class="btn btn-xs btn-default" data-toggle="tooltip" title="Eliminar" href="{{ path('admin_departamento_delete', {'id': departamento.id}) }}"><i class="fa fa-close text-danger"></i></a>
+                                            <a class="btn btn-xs btn-default" data-toggle="tooltip" title="Editar" href="{{ path('admin_privilegio_edit', {'id': privilegio.id}) }}"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-xs btn-default" data-toggle="tooltip" title="Eliminar" href="{{ path('admin_privilegio_delete', {'id': privilegio.id}) }}"><i class="fa fa-close text-danger"></i></a>
                                         </div>
                                     </td>
-                                    <td><a href="{{ path('admin_departamento_show', {'id': departamento.id}) }}">{{ departamento.id }}</a></td>
-                                    <td>{{ departamento.nombre }}</td>
-                                    <td>{{ departamento.created | date('d-m-Y H:i:s') }}</td>
-                                    <td>{{ departamento.updated | date('d-m-Y H:i:s') }}</td>
+                                    <td><a href="{{ path('admin_privilegio_show', {'id': privilegio.id}) }}">{{ privilegio.id }}</a></td>
+                                    <td>{{ privilegio.nombre }}</td>
+                                    <td>{{ privilegio.slug }}</td>
+                                    <td>{{ privilegio.created | date('d-m-Y H:i:s') }}</td>
+                                    <td>{{ privilegio.updated | date('d-m-Y H:i:s') }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

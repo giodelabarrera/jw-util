@@ -13,11 +13,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Table(
  *     name="asignacion",
  *     uniqueConstraints={
- *          @ORM\UniqueConstraint(columns={"user_id", "departamento_id"})
+ *          @ORM\UniqueConstraint(columns={"hermano_id", "privilegio_id", "fecha"})
  *     }
  * )
- * @UniqueEntity(fields={"user", "departamento"})
- * @UniqueEntity(fields={"departamento", "user"})
+ * @UniqueEntity(fields={"hermano", "privilegio", "fecha"})
+ * @UniqueEntity(fields={"privilegio", "fecha", "hermano"})
+ * @UniqueEntity(fields={"fecha", "hermano", "privilegio"})
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AsignacionRepository")
  */
 class Asignacion extends DateStampEntity
@@ -32,31 +33,31 @@ class Asignacion extends DateStampEntity
     private $id;
 
     /**
-     * @var User
+     * @var Hermano
      *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     *
-     * @Assert\NotBlank()
-     */
-    private $user;
-
-    /**
-     * @var Departamento
-     *
-     * @ORM\ManyToOne(targetEntity="Departamento")
-     * @ORM\JoinColumn(name="departamento_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Hermano")
+     * @ORM\JoinColumn(name="hermano_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      *
      * @Assert\NotBlank()
      */
-    private $departamento;
+    private $hermano;
 
     /**
-     * @var string
+     * @var Privilegio
      *
-     * @ORM\Column(name="cargo", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Privilegio")
+     * @ORM\JoinColumn(name="privilegio_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
+     * @Assert\NotBlank()
      */
-    private $cargo;
+    private $privilegio;
+
+    /**
+     * @var \Datetime
+     *
+     * @ORM\Column(name="fecha", type="date")
+     */
+    private $fecha;
 
     /**
      * Asignacion constructor.
@@ -74,8 +75,6 @@ class Asignacion extends DateStampEntity
         return (string)$this->id;
     }
 
-
-
     /**
      * Get id
      *
@@ -87,74 +86,74 @@ class Asignacion extends DateStampEntity
     }
 
     /**
-     * Set cargo
+     * Set fecha
      *
-     * @param string $cargo
+     * @param \DateTime $fecha
      *
      * @return Asignacion
      */
-    public function setCargo($cargo)
+    public function setFecha($fecha)
     {
-        $this->cargo = $cargo;
+        $this->fecha = $fecha;
 
         return $this;
     }
 
     /**
-     * Get cargo
+     * Get fecha
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getCargo()
+    public function getFecha()
     {
-        return $this->cargo;
+        return $this->fecha;
     }
 
     /**
-     * Set user
+     * Set hermano
      *
-     * @param \AppBundle\Entity\User $user
+     * @param \AppBundle\Entity\Hermano $hermano
      *
      * @return Asignacion
      */
-    public function setUser(\AppBundle\Entity\User $user)
+    public function setHermano(\AppBundle\Entity\Hermano $hermano)
     {
-        $this->user = $user;
+        $this->hermano = $hermano;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get hermano
      *
-     * @return \AppBundle\Entity\User
+     * @return \AppBundle\Entity\Hermano
      */
-    public function getUser()
+    public function getHermano()
     {
-        return $this->user;
+        return $this->hermano;
     }
 
     /**
-     * Set departamento
+     * Set privilegio
      *
-     * @param \AppBundle\Entity\Departamento $departamento
+     * @param \AppBundle\Entity\Privilegio $privilegio
      *
      * @return Asignacion
      */
-    public function setDepartamento(\AppBundle\Entity\Departamento $departamento)
+    public function setPrivilegio(\AppBundle\Entity\Privilegio $privilegio)
     {
-        $this->departamento = $departamento;
+        $this->privilegio = $privilegio;
 
         return $this;
     }
 
     /**
-     * Get departamento
+     * Get privilegio
      *
-     * @return \AppBundle\Entity\Departamento
+     * @return \AppBundle\Entity\Privilegio
      */
-    public function getDepartamento()
+    public function getPrivilegio()
     {
-        return $this->departamento;
+        return $this->privilegio;
     }
 }

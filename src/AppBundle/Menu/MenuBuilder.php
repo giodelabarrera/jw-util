@@ -38,21 +38,34 @@ class MenuBuilder
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
 
+        // user
+        $menu->addChild('heading_user', [
+            'label' => 'Usuario',
+            'attributes' => ['class' => 'nav-main-heading'],
+            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
+        ]);
+        $menu->addChild('user', [
+            'label' => 'Usuario',
+            'route' => 'admin_user_index',
+            'attributes' => ['icon' => 'fa fa-user'],
+            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
+        ]);
+
         // content
         $menu->addChild('heading_content', [
             'label' => 'Contenido',
             'attributes' => ['class' => 'nav-main-heading'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
-        $menu->addChild('user', [
-            'label' => 'User',
-            'route' => 'admin_user_index',
+        $menu->addChild('hermano', [
+            'label' => 'Hermano',
+            'route' => 'admin_hermano_index',
             'attributes' => ['icon' => 'fa fa-user'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
-        $menu->addChild('departamento', [
-            'label' => 'Departamento',
-            'route' => 'admin_departamento_index',
+        $menu->addChild('privilegio', [
+            'label' => 'Privilegio',
+            'route' => 'admin_privilegio_index',
             'attributes' => ['icon' => 'fa fa-user'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);

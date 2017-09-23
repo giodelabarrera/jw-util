@@ -43,6 +43,7 @@
                                 <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('u.username') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Username', 'u.username') }}</th>
                                 <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('u.name') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Name', 'u.name') }}</th>
                                 <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('u.surname') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Surname', 'u.surname') }}</th>
+                                <th>Roles</th>
                                 <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('u.created') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Created', 'u.created') }}</th>
                                 <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('u.updated') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Updated', 'u.updated') }}</th>
                             </tr>
@@ -63,6 +64,7 @@
                                     <td>{{ user.username }}</td>
                                     <td>{{ user.name }}</td>
                                     <td>{{ user.surname }}</td>
+                                    <td>{{ user.roles|join(', ') }}</td>
                                     <td>{{ user.created | date('d-m-Y H:i:s') }}</td>
                                     <td>{{ user.updated | date('d-m-Y H:i:s') }}</td>
                                 </tr>

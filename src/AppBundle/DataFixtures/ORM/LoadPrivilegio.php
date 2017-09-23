@@ -3,7 +3,7 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Asignacion;
-use AppBundle\Entity\Departamento;
+use AppBundle\Entity\Privilegio;
 use AppBundle\Entity\User;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -13,10 +13,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 /**
- * Class LoadDepartamento
+ * Class LoadPrivilegio
  * @package AppBundle\DataFixtures\ORM
  */
-class LoadDepartamento extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class LoadPrivilegio extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     /**
      * @var
@@ -48,13 +48,25 @@ class LoadDepartamento extends AbstractFixture implements OrderedFixtureInterfac
             [
                 'name' => 'Sonido',
                 'slug' => 'sonido',
-            ]
+            ],
+            [
+                'name' => 'Responsable de plataforma',
+                'slug' => 'responsable-de-plataforma',
+            ],
+            [
+                'name' => 'Auxiliar de plataforma',
+                'slug' => 'auxiliar-de-plataforma',
+            ],
+            [
+                'name' => 'Responsable de sonido',
+                'slug' => 'responsable-de-sonido',
+            ],
         ];
 
 
         foreach ($names as $nameMixed) {
 
-            $entity = new Departamento();
+            $entity = new Privilegio();
             $entity->setNombre($nameMixed['name']);
             $entity->setSlug($nameMixed['slug']);
 

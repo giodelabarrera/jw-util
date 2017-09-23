@@ -1,0 +1,88 @@
+{% extends 'admin/base.html.twig' %}
+
+{% set entity_name = 'Hermano' %}
+{% set route_prefix = 'admin_hermano' %}
+{% set action = 'list' %}
+{% set actions = {'create': true, 'filter': true} %}
+
+{% block title %}{{ entity_name }}{% endblock %}
+
+{% block page_header %}
+    {% embed 'admin/layout/crud/_page_header.html.twig' %}
+        {% block page_heading %}{{ entity_name }}{% endblock %}
+        {% block breadcrumb %}
+            {{ include('admin/layout/crud/_breadcrumb.html.twig') }}
+        {% endblock breadcrumb %}
+    {% endembed %}
+{% endblock page_header %}
+
+{% block page_content_nav %}
+    {{ include('admin/layout/crud/_page_content_navbar.html.twig') }}
+    {{ include('admin/layout/form/_filters_form.html.twig', {
+        'filter_form': filter_form,
+        'clear_path': path('admin_hermano_index'),
+    })}}
+{% endblock page_content_nav %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-lg-12">
+            {% embed 'admin/layout/crud/_block.html.twig' %}
+
+                {% block block_header_title %}{{ entity_name }}{% endblock %}
+
+                {% block block_content %}
+                    {% if pagination.items is not empty %}
+                        {% set pagination_direction = pagination.getDirection() ? pagination.getDirection() : 'asc' %}
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th class="text-center" style="width: 100px;">Actions</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('h.id') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'ID', 'h.id') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('h.nombre') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Nombre', 'h.nombre') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('h.apellidos') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Apellidos', 'h.apellidos') }}</th>
+                                <th>Privilegios</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('h.email') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Email', 'h.email') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('h.telefono') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Teléfono', 'h.telefono') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('h.created') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Created', 'h.created') }}</th>
+                                <th class="list-order-{{ pagination_direction }} {% if pagination.isSorted('h.updated') %}sorted{% endif %}">{{ knp_pagination_sortable(pagination, 'Updated', 'h.updated') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for hermano in pagination %}
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-xs btn-default" data-toggle="tooltip" title="Editar" href="{{ path('admin_hermano_edit', {'id': hermano.id}) }}"><i class="fa fa-pencil"></i></a>
+                                            <a class="btn btn-xs btn-default" data-toggle="tooltip" title="Eliminar" href="{{ path('admin_hermano_delete', {'id': hermano.id}) }}"><i class="fa fa-close text-danger"></i></a>
+                                        </div>
+                                    </td>
+                                    <td><a href="{{ path('admin_hermano_show', {'id': hermano.id}) }}">{{ hermano.id }}</a></td>
+                                    <td>{{ hermano.nombre }}</td>
+                                    <td>{{ hermano.apellidos }}</td>
+                                    <td>{{ hermano.privilegios|join(', ') }}</td>
+                                    <td>{{ hermano.email }}</td>
+                                    <td>{{ hermano.telefono }}</td>
+                                    <td>{{ hermano.created | date('d-m-Y H:i:s') }}</td>
+                                    <td>{{ hermano.updated | date('d-m-Y H:i:s') }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        </div>
+                    {% else %}
+                        <p>
+                            The list is empty.
+                        </p>
+                    {% endif %}
+                {% endblock %}
+
+                {% block block_footer_pagination %}
+                    {{ knp_pagination_render(pagination) }}
+                {% endblock %}
+
+            {% endembed %}
+        </div>
+    </div>
+{% endblock %}

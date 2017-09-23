@@ -1,14 +1,14 @@
 {% extends 'admin/base.html.twig' %}
 
-{% set entity_name = 'Departamento' %}
-{% set route_prefix = 'admin_departamento' %}
+{% set entity_name = 'Hermano' %}
+{% set route_prefix = 'admin_hermano' %}
 {% set action = 'show' %}
 {% set actions = {
 'create': true,
 'edit': true,
 'list': true,
 } %}
-{% set entity = departamento %}
+{% set entity = hermano %}
 
 {% block page_header %}
     {% embed 'admin/layout/crud/_page_header.html.twig' %}
@@ -36,19 +36,35 @@
                         <tbody>
                         <tr>
                             <th style="width: 130px">Id</th>
-                            <td>{{ departamento.id }}</td>
+                            <td>{{ hermano.id }}</td>
                         </tr>
                         <tr>
                             <th>Nombre</th>
-                            <td>{{ departamento.nombre }}</td>
+                            <td>{{ hermano.nombre }}</td>
+                        </tr>
+                        <tr>
+                            <th>Apellidos</th>
+                            <td>{{ hermano.apellidos }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ hermano.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Teléfono</th>
+                            <td>{{ hermano.telefono }}</td>
+                        </tr>
+                        <tr>
+                            <th>Privilegios</th>
+                            <td>{{ hermano.privilegios|join(', ') }}</td>
                         </tr>
                         <tr>
                             <th>Created</th>
-                            <td>{% if departamento.created %}{{ departamento.created|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{% if hermano.created %}{{ hermano.created|date('Y-m-d H:i:s') }}{% endif %}</td>
                         </tr>
                         <tr>
                             <th>Updated</th>
-                            <td>{% if departamento.updated %}{{ departamento.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td>{% if hermano.updated %}{{ hermano.updated|date('Y-m-d H:i:s') }}{% endif %}</td>
                         </tr>
                         </tbody>
                     </table>

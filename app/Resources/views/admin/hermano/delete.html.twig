@@ -1,11 +1,14 @@
 {% extends 'admin/base.html.twig' %}
 
-{% set entity_name = 'Departamento' %}
-{% set route_prefix = 'admin_departamento' %}
-{% set action = 'new' %}
+{% set entity_name = 'Hermano' %}
+{% set route_prefix = 'admin_hermano' %}
+{% set action = 'delete' %}
 {% set actions = {
+'create': true,
+'edit': true,
 'list': true,
 } %}
+{% set entity = hermano %}
 
 {% block page_header %}
     {% embed 'admin/layout/crud/_page_header.html.twig' %}
@@ -22,17 +25,16 @@
 
 {% block page_content %}
 
-    {{ form_start(form, {
-        'attr': {'novalidate': 'novalidate'}
-    }) }}
+    {{ form_start(delete_form) }}
     <div class="row">
         <div class="col-lg-12">
+
             {% embed 'admin/layout/crud/_block.html.twig' %}
 
                 {% block block_header_title %}{{ entity_name }}{% endblock %}
 
                 {% block block_content %}
-                    {{ form_widget(form) }}
+                    <p>Are you sure you want to delete the selected "{{ entity.__toString }}" element?</p>
                 {% endblock %}
 
                 {% block block_footer %}{% endblock %}
@@ -41,5 +43,6 @@
         </div>
     </div>
     {{ include('admin/layout/crud/_form_actions.html.twig') }}
-    {{ form_end(form) }}
+    {{ form_end(delete_form) }}
+
 {% endblock %}

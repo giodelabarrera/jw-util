@@ -8,7 +8,7 @@ security:
     role_hierarchy:
         ROLE_SUPER_ADMIN: ROLE_ADMIN
         ROLE_ADMIN: [ROLE_USER]
-        ROLE_USER: [] # Everyone has this ROLES
+#        ROLE_USER: [] # Everyone has this ROLES
 
     providers:
         main:
