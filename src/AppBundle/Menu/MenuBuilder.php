@@ -75,104 +75,44 @@ class MenuBuilder
             'attributes' => ['icon' => 'fa fa-user'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
-        // programa
-        $menu->addChild('heading_programa', [
-            'label' => 'Programa',
+
+        // programación
+        $menu->addChild('heading_programacion', [
+            'label' => 'Programación',
             'attributes' => ['class' => 'nav-main-heading'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
-        $menu->addChild('microfono', [
+        $menu->addChild('programacion_microfono', [
             'label' => 'Micrófono',
-            'route' => 'admin_programa_microfono',
+            'route' => 'admin_microfono_generar_turnos',
             'attributes' => ['icon' => 'fa fa-user'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
-        $menu->addChild('sonido', [
+        $menu->addChild('programacion_sonido', [
             'label' => 'Sonido',
-            'route' => 'admin_programa_sonido',
+            'uri' => '#',
             'attributes' => ['icon' => 'fa fa-user'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
-        /*$menu->addChild('usertype', [
-            'label' => 'Type of user',
-            'route' => 'admin_usertype_index',
-            'attributes' => ['icon' => 'si si-moustache'],
-            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
-        ]);
-        $menu->addChild('country', [
-            'label' => 'Country',
-            'route' => 'admin_country_index',
-            'attributes' => ['icon' => 'fa fa-flag-o'],
-            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
-        ]);
 
-        // archive
-        $menu->addChild('heading_archive', [
-            'label' => 'Archive',
+        // turnos
+        $menu->addChild('heading_turnos', [
+            'label' => 'Turnos',
             'attributes' => ['class' => 'nav-main-heading'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
-        $menu->addChild('archive', [
-            'label' => 'Archive',
-            'route' => 'admin_archive_index',
-            'attributes' => ['icon' => 'si si-drawer'],
+        $menu->addChild('turnos_microfono', [
+            'label' => 'Micrófono',
+            'uri' => '#',
+            'attributes' => ['icon' => 'fa fa-user'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
-        $menu->addChild('download', [
-            'label' => 'Download',
-            'route' => 'admin_download_index',
-            'attributes' => ['icon' => 'fa fa-download'],
+        $menu->addChild('turnos_sonido', [
+            'label' => 'Sonido',
+            'uri' => '#',
+            'attributes' => ['icon' => 'fa fa-user'],
             'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
         ]);
-        $menu->addChild('language', [
-            'label' => 'Language',
-            'route' => 'admin_language_index',
-            'attributes' => ['icon' => 'fa fa-language'],
-            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
-        ]);
-        $menu->addChild('category', [
-            'label' => 'Category',
-            'route' => 'admin_category_index',
-            'attributes' => ['icon' => 'fa fa-list-ul'],
-            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
-        ]);
-        $menu->addChild('documenttype', [
-            'label' => 'Type of document',
-            'route' => 'admin_documenttype_index',
-            'attributes' => ['icon' => 'fa fa-list-ul'],
-            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
-        ]);
-        $menu->addChild('filetype', [
-            'label' => 'Type of file',
-            'route' => 'admin_filetype_index',
-            'attributes' => ['icon' => 'fa fa-list-ul'],
-            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
-        ]);
-
-        // content
-        $menu->addChild('heading_content', [
-            'label' => 'Content',
-            'attributes' => ['class' => 'nav-main-heading'],
-            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
-        ]);
-        $menu->addChild('configpage', [
-            'label' => 'Config of page',
-            'route' => 'admin_configpage_index',
-             'attributes' => ['icon' => 'si si-wrench'],
-            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
-        ]);
-        $menu->addChild('slide', [
-            'label' => 'Slide',
-            'route' => 'admin_slide_index',
-            'attributes' => ['icon' => 'fa fa-sliders'],
-            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
-        ]);
-        $menu->addChild('chatmessage', [
-            'label' => 'Message of chat',
-            'route' => 'admin_chatmessage_index',
-            'attributes' => ['icon' => 'fa fa-comment-o'],
-            'labelAttributes' => ['span_container' => true, 'class' => 'sidebar-mini-hide'],
-        ]);*/
 
         return $menu;
     }
